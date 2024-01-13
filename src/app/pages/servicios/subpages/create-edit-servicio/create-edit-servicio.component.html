@@ -1,0 +1,92 @@
+<header *ngIf="!service">
+  <h3 class="text-white">Crear nuevo Servicio</h3>
+</header>
+<div class="wrapper">
+  <form class="card">
+    <h5>{{ service ? "Editar servicio" : "Crear servicio" }}</h5>
+    <!-- <span>Editar Servicio</span> -->
+    <div class="inputs_iconbox">
+      <div class="inputs">
+        <div class="mb-2">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            [disabled]="loading"
+            class="form-control form-control-sm"
+          />
+        </div>
+        <div class="mb-2">
+          <label for="icon">Icono</label>
+          <input
+            type="file"
+            name="icon"
+            [disabled]="loading"
+            class="form-control"
+            (change)="loadImg($event)"
+            required
+          />
+        </div>
+        <div class="mb-2">
+          <label for="images">Imagenes</label>
+          <input
+            type="file"
+            name="images"
+            [disabled]="loading"
+            multiple
+            class="form-control"
+            (change)="loadImg($event)"
+          />
+        </div>
+      </div>
+      <div class="img-container">
+        <img
+          [src]="localIconFile.src"
+          *ngIf="localIconFile"
+          style="filter: none"
+        />
+      </div>
+    </div>
+    <span class="alert alert-info m-0 p-1 text-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-info-circle"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+        />
+        <path
+          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+        />
+      </svg>
+      Deslize a la izquierda para visualizar icono</span
+    >
+    <button
+      class="btn btn-sm btn-primary btn-block"
+      [disabled]="loading"
+      (click)="saveService()"
+    >
+      <span *ngIf="!loading">
+        {{ service ? "Guardar cambios" : "Guardar" }}
+      </span>
+      <div class="spinner-border text-ligth" *ngIf="loading" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </button>
+  </form>
+
+  <div class="img-list-to-upload card">
+    <h5 class="p-2 m-0 mt-1">Imagenes cargadas ({{ localImgFiles.length }})</h5>
+    <app-images-grid
+      *ngIf="localImgFiles.length > 0"
+      [loadImgs]="localImgFiles"
+      [deletingImg]="deletingImg"
+      (deleteImageID)="deleteImg($event.id)"
+    ></app-images-grid>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div
+  class="img-list" 
+  [ngClass]="{'card border border-2': showBorder}"
+  *ngIf="images.length > 0"
+>
+  <!-- imagen -->
+  <div class="img-container" *ngFor="let image of images; index as i">
+    <img [src]="image.src" fill />
+    <!-- loading element -->
+    <div
+      class="loading"
+      *ngIf="deletingImg.state && deletingImg.id === image.id"
+    >
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="img-panel" *ngIf="!deletingImg.state">
+      <button class="btn btn-danger btn-sm" (click)="deleteImage(image.id!)">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

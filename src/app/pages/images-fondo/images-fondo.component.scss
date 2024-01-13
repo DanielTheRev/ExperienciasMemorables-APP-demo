@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  gap: 0.5rem;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px #333, 0px 0px 4px #333;
+  border-radius: 0px 0px 0.5rem 0.5rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  gap: 1rem;
+  padding: 0.5rem;
+  .loading {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+  }
+  .panel {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, max-content);
+    animation: fadeInDown 0.5s;
+    .controls {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 1fr max-content;
+      padding: 0.5rem;
+      gap: 0.5rem;
+    }
+    .status {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+  app-images-grid {
+    animation: fadeInUp 1s;
+  }
+}
+
+@keyframes enter {
+  from {
+    top: 100%;
+  }
+  to {
+    top: 0px;
+  }
+}
+
+@keyframes showMessage {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 100%;
+  }
+}

@@ -1,0 +1,73 @@
+<header class="p-2 bg-primary ">
+  <h3 class="text-white">Imagenes de fondo</h3>
+</header>
+
+<div class="wrapper">
+  <div class="panel card border-2">
+    <div class="controls">
+      <input
+        type="file"
+        #inputFile
+        class="form-control"
+        (change)="inputImgHandler($event)"
+        multiple
+      />
+      <!-- <button class="btn btn-sm btn-danger">Quitar todas</button> -->
+      <button
+        class="btn btn-sm btn-success"
+        (click)="submitData()"
+        [disabled]="files.length <= 0 || canSubmit <= 0"
+      >
+        <div
+          class="spinner-border text-white"
+          role="status"
+          *ngIf="isLoading === 'submiting images'"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        {{ isLoading !== "submiting images" ? "Guardar Cambios" : "" }}
+      </button>
+    </div>
+    <!-- Estado de cuantas imagenes puede subir -->
+    <div class="status">
+      <div
+        class="alert alert-info m-1 text-center p-1"
+        role="alert"
+        *ngIf="files.length > 0"
+      >
+        {{ files.length }} {{ files.length > 1 ? "imagenes" : "imagen" }} para
+        subir
+      </div>
+      <div
+        class="alert alert-warning m-1 text-center p-1"
+        role="alert"
+        *ngIf="canSubmit <= 0 && isLoading !== 'load Images'"
+      >
+        Debes eliminar alguna foto para poder subir otra
+      </div>
+      <div
+        class="alert alert-secondary m-1 text-center p-1"
+        role="alert"
+        *ngIf="
+          canSubmit > 0 && isLoading !== 'load Images' && files.length <= 0
+        "
+      >
+        Puedes subir {{ canSubmit }} {{ canSubmit > 1 ? "fotos" : "foto" }}
+      </div>
+    </div>
+  </div>
+  <!-- Loading imgs -->
+  <div class="loading" *ngIf="isLoading === 'load Images'">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <!-- Listado de imagenes -->
+  <app-images-grid
+    *ngIf="isLoading !== 'load Images'"
+    [loadImgs]="imgs"
+    [deletingImg]="deletingImg"
+    (deleteImageID)="deleteImg($event.id)"
+    [showBorder]="true"
+  ></app-images-grid>
+</div>

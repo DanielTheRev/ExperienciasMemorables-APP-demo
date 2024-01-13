@@ -1,0 +1,29 @@
+<header class="p-2 bg-primary">
+  <h5 class="text-white">Administrar consultas</h5>
+</header>
+
+<div class="alert alert-warning text-center" *ngIf="Messages.isEmpty">
+  Por el momento no hay consultas
+</div>
+
+<div class="list-group p-1" *ngIf="!Messages.isEmpty">
+  <div
+    class="list-group-item list-group-item-action"
+    aria-current="true"
+    *ngFor="let message of Messages.data"
+    [id]="message._id"
+    (click)="setActive(message._id!)"
+  >
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ message.nombre }}</h5>
+      <span
+        class="badge bg-success rounded-pill d-flex justify-content-center align-items-center"
+        >16-04-2023</span
+      >
+    </div>
+    <p class="mb-1">
+      {{ message.message }}
+    </p>
+    <small>{{ message.correo }}</small>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+:host{
+  height: max-content;
+  z-index: 9999;
+  background-color: black;
+}
+
+.nav {
+  display: none;
+  justify-content: space-evenly;
+  padding: 0.5rem 0px;
+  height: 100%;
+  background: #fff;
+  border-top: 2px solid #ccc;
+  .navbar-brand > span {
+    color: red !important;
+  }
+  @media (max-width: 450px){
+    padding-bottom: 1.6rem !important;
+  }
+  li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: none;
+  };
+  .nav {
+    display: flex;
+  }
+}

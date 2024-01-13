@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  h5 {
+    display: none;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  :host h5 {
+    display: block;
+    padding: 1rem;
+  }
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+}

@@ -1,0 +1,35 @@
+<header class="p-2 bg-primary">
+  <h4 class="text-white">Administrar Servicios</h4>
+  <div class="actionsbox">
+    <button class="btn btn-sm btn-success" (click)="goToCreateEditService()">
+      Nuevo servicio
+    </button>
+  </div>
+</header>
+<div class="alert alert-warning text-center" role="alert" *ngIf="services.isEmpty">
+  Todavia no hay ningun servicio creado
+</div>
+<div class="menu" *ngIf="!services.isEmpty">
+  <ul class="nav nav-underline" data-bs-theme="dark">
+    <li
+      class="nav-item"
+      #link
+      *ngFor="let service of services.data; index as i"
+    >
+      <a
+        class="nav-link"
+        [routerLink]="['servicio', service.name, service._id]"
+        routerLinkActive="active"
+        (click)="serviceSelected = service.name"
+        (click)="link.scrollIntoView({ block: 'center' })"
+        aria-current="page"
+        style="color: #fff;"
+        >{{ service.name }}</a
+      >
+    </li>
+  </ul>
+</div>
+
+<div class="page" *ngIf="!services.isEmpty">
+  <router-outlet></router-outlet>
+</div>

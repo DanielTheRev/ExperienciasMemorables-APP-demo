@@ -1,0 +1,122 @@
+<header class="p-2 bg-primary">
+  <h4 class="text-white">Administrar Nosotros </h4>
+</header>
+
+<div class="content_wrapper">
+  <div class="sections">
+    <div class="section border-2 frase card p-2">
+      <!-- LOADING -->
+      <div class="loading" *ngIf="loadingSection === 'frase'">
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <!-- LOADING END -->
+      <h5>Frase actual</h5>
+      <blockquote [ngClass]="{ 'border border-2 border-warning': onEditFrase }">
+        <q class="p-1" [contentEditable]="onEditFrase" #fraseEl>{{ frase }}</q>
+      </blockquote>
+      <div class="buttons">
+        <button
+          class="btn btn-sm btn-primary"
+          *ngIf="!onEditFrase"
+          (click)="onEditFrase = true"
+        >
+          Cambiar frase
+        </button>
+        <button
+          class="btn btn-sm btn-success"
+          *ngIf="onEditFrase"
+          (click)="frase = fraseEl.textContent!"
+          (click)="saveSection('frase')"
+        >
+          Guardar frase
+        </button>
+        <button
+          class="btn btn-sm btn-danger"
+          *ngIf="onEditFrase"
+          (click)="onEditFrase = false"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <!-- PRESENTACION -->
+
+    <div class="section border-2 presentacion card p-2">
+      <!-- LOADING -->
+      <div class="loading" *ngIf="loadingSection === 'presentacion'">
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <!-- LOADING END -->
+      <h5>Presentacion actual</h5>
+      <p
+        class="p-1"
+        [ngClass]="{ 'border border-warning': onEditPresentacion }"
+        [contentEditable]="onEditPresentacion"
+        #presentacionEl
+      >
+        {{ presentacion }}
+      </p>
+      <div class="buttons">
+        <button
+          class="btn btn-sm btn-primary"
+          *ngIf="!onEditPresentacion"
+          (click)="onEditPresentacion = true"
+        >
+          Cambiar presentacion
+        </button>
+        <button
+          class="btn btn-sm btn-success"
+          *ngIf="onEditPresentacion"
+          (click)="presentacion = presentacionEl.textContent!"
+          (click)="saveSection('presentacion')"
+        >
+          Guardar presentacion
+        </button>
+        <button
+          class="btn btn-sm btn-danger"
+          *ngIf="onEditPresentacion"
+          (click)="onEditPresentacion = false"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <div class="section border-2 imagendeFondo card p-2">
+      <h5>imagen de fondo</h5>
+      <div class="wrapper">
+        <!-- LOADING -->
+        <div class="loading" *ngIf="loadingSection === 'Image'">
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <!-- LOADING END -->
+        <input
+          type="file"
+          #fileEl
+          (change)="loadImg($event)"
+          class="form-control form-control-sm"
+        />
+        <button class="btn btn-sm btn-success" [disabled]="fileEl.files?.length! <= 0" (click)="saveImg()">
+          Guardar
+        </button>
+      </div>
+
+      <div class="alert alert-primary d-none">
+        Desliza para ver la imagen de fondo
+      </div>
+    </div>
+  </div>
+  <div class="imagenDeFondoPresentacion card">
+    <div class="alert alert-warning">Aqui se mostrara la imagen cargada</div>
+    <div class="img-container">
+      <img *ngIf="locaImgUrl" [src]="locaImgUrl" alt="" />
+    </div>
+  </div>
+</div>

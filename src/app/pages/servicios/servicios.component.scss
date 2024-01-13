@@ -1,0 +1,64 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px #333, 0px 0px 4px #333;
+  border-radius: 0px 0px 0.5rem 0.5rem;
+  z-index: 2;
+  h3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .actionsbox {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+.menu {
+  padding: 0.5rem;
+  background: var(--bs-green);
+  margin-top: -5px;
+  z-index: 1;
+  animation: fadeInDown 0.5s;
+  ul {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    grid-auto-flow: column;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    // padding: 1rem;
+    justify-content: start;
+    li {
+      width: 100%;
+      scroll-snap-align: center;
+      // a {
+      //   color: #fff !important;
+      // }
+    }
+  }
+}
+
+.page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  animation: fadeInUp 1s;
+}
